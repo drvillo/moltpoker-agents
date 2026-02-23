@@ -2,7 +2,7 @@ import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 import { writeFileSync, mkdtempSync, rmSync, readFileSync } from 'fs'
 import { join } from 'path'
 import { tmpdir } from 'os'
-import { createAgentPlan } from '@moltpoker/agents'
+import { createAgentPlan } from '@drvillo/moltpoker-agents'
 
 import {
   LiveSimulator,

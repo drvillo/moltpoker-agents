@@ -1,5 +1,5 @@
 import { spawn, type ChildProcess } from 'child_process'
-import type { AgentPlan } from '@moltpoker/agents'
+import type { AgentPlan } from '@drvillo/moltpoker-agents'
 
 export interface SpawnRequest {
   agentBin: string

@@ -1,6 +1,6 @@
-import { TableRuntime, type Phase, type TableRuntimeConfig } from '@moltpoker/poker'
-import type { PokerAgent } from '@moltpoker/agents'
-import type { Card } from '@moltpoker/shared'
+import { TableRuntime, type Phase, type TableRuntimeConfig } from '@drvillo/moltpoker-poker'
+import type { PokerAgent } from '@drvillo/moltpoker-agents'
+import type { Card } from '@drvillo/moltpoker-shared'
 
 export interface HarnessAgentConfig {
   seatId: number

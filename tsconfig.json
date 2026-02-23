@@ -2,8 +2,8 @@
   "extends": "../tsconfig.json",
   "compilerOptions": {
     "paths": {
-      "@moltpoker/sdk": ["./packages/sdk/src"],
-      "@moltpoker/sdk/*": ["./packages/sdk/src/*"]
+      "@drvillo/moltpoker-sdk": ["./packages/sdk/src"],
+      "@drvillo/moltpoker-sdk/*": ["./packages/sdk/src/*"]
     }
   }
 }

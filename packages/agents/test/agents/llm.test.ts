@@ -3,7 +3,7 @@ import { MockLanguageModelV3 } from 'ai/test'
 import { writeFileSync, mkdtempSync, rmSync } from 'fs'
 import { join } from 'path'
 import { tmpdir } from 'os'
-import type { GameStatePayload, LegalAction } from '@moltpoker/shared'
+import type { GameStatePayload, LegalAction } from '@drvillo/moltpoker-shared'
 
 import { LlmAgent, formatGameState } from '../../src/agents/llm.js'
 

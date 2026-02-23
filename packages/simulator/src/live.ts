@@ -3,7 +3,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import type { ChildProcess } from 'child_process';
 import WebSocket from 'ws';
-import { createSimulationAgentPlan, type AgentPlan } from '@moltpoker/agents';
+import { createSimulationAgentPlan, type AgentPlan } from '@drvillo/moltpoker-agents';
 import { ChildProcessSpawnStrategy, type SpawnStrategy } from './spawn-strategy.js';
 
 /** Parsed agent slot: type plus optional inline model override (e.g. llm:anthropic:claude-sonnet-4-5) */

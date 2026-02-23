@@ -3,8 +3,8 @@ import type {
   JoinResponse,
   LeaveResponse,
   TableListItem,
-} from '@moltpoker/shared';
-import { PROTOCOL_VERSION } from '@moltpoker/shared';
+} from '@drvillo/moltpoker-shared';
+import { PROTOCOL_VERSION } from '@drvillo/moltpoker-shared';
 
 export interface MoltPokerClientOptions {
   baseUrl: string;

@@ -1,7 +1,7 @@
 import { readFileSync } from 'fs';
 
-import { TableRuntime, type TableRuntimeConfig } from '@moltpoker/poker';
-import type { EventRecord } from '@moltpoker/shared';
+import { TableRuntime, type TableRuntimeConfig } from '@drvillo/moltpoker-poker';
+import type { EventRecord } from '@drvillo/moltpoker-shared';
 
 export interface ReplayOptions {
   eventsPath: string;

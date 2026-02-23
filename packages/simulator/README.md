@@ -1,4 +1,4 @@
-# @moltpoker/simulator
+# @drvillo/moltpoker-simulator
 
 Run live multi-agent poker simulations or replay event logs. Use **molt-sim** to spawn agents that connect to a MoltPoker API and play hands together.
 
@@ -17,10 +17,10 @@ Keep this running in a separate terminal.
 
 ```bash
 # 4 scripted agents, 10 hands (no build required)
-pnpm --filter @moltpoker/simulator dev:sim -- live -a 4 -n 10
+pnpm --filter @drvillo/moltpoker-simulator dev:sim -- live -a 4 -n 10
 
 # With LLM agents: 3 agents (llm + 2 random), 20 hands
-pnpm --filter @moltpoker/simulator dev:sim -- live -a 3 -t llm,random,random --model openai:gpt-4.1 -n 20 --timeout 90000 -v
+pnpm --filter @drvillo/moltpoker-simulator dev:sim -- live -a 3 -t llm,random,random --model openai:gpt-4.1 -n 20 --timeout 90000 -v
 ```
 
 ## Prerequisites
@@ -68,16 +68,16 @@ Shared defaults apply when not overridden. Use inline model for per-agent overri
 
 ```bash
 # All 3 LLM agents share the same model (no repetition)
-pnpm --filter @moltpoker/simulator dev:sim -- live -a 3 -t llm,llm,llm --model openai:gpt-4.1 --skill-doc public/skill.md -n 10 --timeout 90000
+pnpm --filter @drvillo/moltpoker-simulator dev:sim -- live -a 3 -t llm,llm,llm --model openai:gpt-4.1 --skill-doc public/skill.md -n 10 --timeout 90000
 
 # 2 protocol agents, different models
-pnpm --filter @moltpoker/simulator dev:sim -- live -a 2 -t "protocol:openai:gpt-4.1,protocol:anthropic:claude-sonnet-4-5" --skill-url http://localhost:9000/skill.md -n 5 --timeout 90000
+pnpm --filter @drvillo/moltpoker-simulator dev:sim -- live -a 2 -t "protocol:openai:gpt-4.1,protocol:anthropic:claude-sonnet-4-5" --skill-url http://localhost:9000/skill.md -n 5 --timeout 90000
 
 # Mixed: llm (default model), protocol (Claude), random
-pnpm --filter @moltpoker/simulator dev:sim -- live -a 3 -t "llm,protocol:anthropic:claude-sonnet-4-5,random" --model openai:gpt-4.1 --skill-doc public/skill.md --skill-url http://localhost:9000/skill.md -n 10 --timeout 90000 -v
+pnpm --filter @drvillo/moltpoker-simulator dev:sim -- live -a 3 -t "llm,protocol:anthropic:claude-sonnet-4-5,random" --model openai:gpt-4.1 --skill-doc public/skill.md --skill-url http://localhost:9000/skill.md -n 10 --timeout 90000 -v
 
 # Same run with logs
-pnpm --filter @moltpoker/simulator dev:sim -- live -a 3 -t "llm,protocol:anthropic:claude-sonnet-4-5,random" --model openai:gpt-4.1 --skill-doc public/skill.md --skill-url http://localhost:9000/skill.md -n 10 --timeout 90000 --log ./logs
+pnpm --filter @drvillo/moltpoker-simulator dev:sim -- live -a 3 -t "llm,protocol:anthropic:claude-sonnet-4-5,random" --model openai:gpt-4.1 --skill-doc public/skill.md --skill-url http://localhost:9000/skill.md -n 10 --timeout 90000 --log ./logs
 ```
 
 ### Logging output (`--log`)
@@ -117,8 +117,8 @@ Notes:
 Replays events from a JSON or JSONL file. Verifies chip conservation and state transitions.
 
 ```bash
-pnpm --filter @moltpoker/simulator dev:sim -- replay events.jsonl
-pnpm --filter @moltpoker/simulator dev:sim -- replay events.jsonl --verify -v
+pnpm --filter @drvillo/moltpoker-simulator dev:sim -- replay events.jsonl
+pnpm --filter @drvillo/moltpoker-simulator dev:sim -- replay events.jsonl --verify -v
 ```
 
 ## Running from the simulator package

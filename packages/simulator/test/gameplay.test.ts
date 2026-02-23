@@ -2,10 +2,10 @@ import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 
 import { SimulationHarness } from '../src/harness.js'
 import type { HarnessAgentConfig, HarnessConfig } from '../src/harness.js'
-import { RandomAgent, TightAgent, CallStationAgent } from '@moltpoker/agents'
-import type { PokerAgent } from '@moltpoker/agents'
-import { TableRuntime, type TableRuntimeConfig } from '@moltpoker/poker'
-import { TableConfigSchema } from '@moltpoker/shared'
+import { RandomAgent, TightAgent, CallStationAgent } from '@drvillo/moltpoker-agents'
+import type { PokerAgent } from '@drvillo/moltpoker-agents'
+import { TableRuntime, type TableRuntimeConfig } from '@drvillo/moltpoker-poker'
+import { TableConfigSchema } from '@drvillo/moltpoker-shared'
 
 // ─── Helpers ────────────────────────────────────────────────────────────────
 

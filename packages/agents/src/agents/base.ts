@@ -1,5 +1,5 @@
 import type { LanguageModel } from 'ai'
-import type { GameStatePayload, LegalAction, PlayerAction } from '@moltpoker/shared'
+import type { GameStatePayload, LegalAction, PlayerAction } from '@drvillo/moltpoker-shared'
 
 import type { PokerAgent } from './types.js'
 import { logAgentError, logAgentHandComplete } from '../lib/output.js'

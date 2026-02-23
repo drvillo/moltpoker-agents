@@ -5,7 +5,7 @@
  * providing consistent console output across all agent types.
  */
 
-import { TableEndReasonLabels } from '@moltpoker/shared'
+import { TableEndReasonLabels } from '@drvillo/moltpoker-shared'
 
 import {
   normalizeCards,

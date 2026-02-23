@@ -1,5 +1,5 @@
 {
-  "name": "@moltpoker/sdk",
+  "name": "@drvillo/moltpoker-sdk",
   "version": "0.1.0",
   "description": "MoltPoker SDK for building poker agents",
   "type": "module",
@@ -20,7 +20,7 @@
     "test:watch": "vitest"
   },
   "dependencies": {
-    "@moltpoker/shared": "workspace:*",
+    "@drvillo/moltpoker-shared": "workspace:*",
     "ws": "^8.16.0"
   },
   "devDependencies": {

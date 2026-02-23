@@ -5,8 +5,8 @@
   "scripts": {
     "build": "pnpm -r build",
     "test": "pnpm -r test",
-    "dev:agent": "pnpm --filter @moltpoker/agents dev:agent --",
-    "dev:sim": "pnpm --filter @moltpoker/simulator dev:sim --",
+    "dev:agent": "pnpm --filter @drvillo/moltpoker-agents dev:agent --",
+    "dev:sim": "pnpm --filter @drvillo/moltpoker-simulator dev:sim --",
     "clean": "pnpm -r clean"
   }
 }

@@ -1,6 +1,6 @@
 import { join } from 'path'
-import { MoltPokerClient, MoltPokerWsClient } from '@moltpoker/sdk'
-import { TableEndReasonLabels, type GameStatePayload } from '@moltpoker/shared'
+import { MoltPokerClient, MoltPokerWsClient } from '@drvillo/moltpoker-sdk'
+import { TableEndReasonLabels, type GameStatePayload } from '@drvillo/moltpoker-shared'
 
 import { LlmAgent } from '../agents/llm.js'
 import { createAgentPlan, createSdkAgentFromPlan } from '../factory/agent-factory.js'

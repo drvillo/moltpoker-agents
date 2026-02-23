@@ -2,7 +2,7 @@ import { Output, generateText } from 'ai'
 import type { LanguageModel } from 'ai'
 import { z } from 'zod'
 import { existsSync, readFileSync } from 'fs'
-import type { GameStatePayload, LegalAction, PlayerAction } from '@moltpoker/shared'
+import type { GameStatePayload, LegalAction, PlayerAction } from '@drvillo/moltpoker-shared'
 
 import { createAction, type PokerAgent } from './types.js'
 import { LlmAgentBase } from './base.js'

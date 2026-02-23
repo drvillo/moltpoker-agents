@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import type { AgentPlan } from '@moltpoker/agents'
+import type { AgentPlan } from '@drvillo/moltpoker-agents'
 
 import { buildSpawnArgs } from '../src/spawn-strategy.js'
 

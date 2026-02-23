@@ -9,9 +9,9 @@ import type {
   TableStatusPayload,
   WelcomePayload,
   WsMessageEnvelope,
-} from '@moltpoker/shared';
-import { ErrorCodes } from '@moltpoker/shared';
-import type { ErrorCode } from '@moltpoker/shared';
+} from '@drvillo/moltpoker-shared';
+import { ErrorCodes } from '@drvillo/moltpoker-shared';
+import type { ErrorCode } from '@drvillo/moltpoker-shared';
 import WebSocket from 'ws';
 
 

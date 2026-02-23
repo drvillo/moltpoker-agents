@@ -1,5 +1,5 @@
-import { cardToString } from '@moltpoker/poker'
-import type { Card, LegalAction } from '@moltpoker/shared'
+import { cardToString } from '@drvillo/moltpoker-poker'
+import type { Card, LegalAction } from '@drvillo/moltpoker-shared'
 
 // ─── Card Formatting ─────────────────────────────────────────────────────────
 

@@ -1,4 +1,4 @@
-import type { Card, GameStatePayload, LegalAction, PlayerAction } from '@moltpoker/shared';
+import type { Card, GameStatePayload, LegalAction, PlayerAction } from '@drvillo/moltpoker-shared';
 
 import { createAction } from './types.js';
 import { DeterministicAgentBase } from './base.js';

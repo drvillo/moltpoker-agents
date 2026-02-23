@@ -19,6 +19,6 @@ export type {
   Card,
   PlayerState,
   Pot,
-} from '@moltpoker/shared';
+} from '@drvillo/moltpoker-shared';
 
-export { PROTOCOL_VERSION, MIN_SUPPORTED_PROTOCOL_VERSION, ErrorCodes } from '@moltpoker/shared';
+export { PROTOCOL_VERSION, MIN_SUPPORTED_PROTOCOL_VERSION, ErrorCodes } from '@drvillo/moltpoker-shared';

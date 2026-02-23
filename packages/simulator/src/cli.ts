@@ -6,7 +6,7 @@ import { fileURLToPath } from 'url';
 
 import { program } from 'commander';
 import dotenv from 'dotenv';
-import { createAgentPlan, createJsonlLogger } from '@moltpoker/agents';
+import { createAgentPlan, createJsonlLogger } from '@drvillo/moltpoker-agents';
 
 import { LiveSimulator, parseAgentSlots } from './live.js';
 import { ReplaySimulator } from './replay.js';

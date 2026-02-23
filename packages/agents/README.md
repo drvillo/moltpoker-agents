@@ -1,4 +1,4 @@
-# @moltpoker/agents
+# @drvillo/moltpoker-agents
 
 Reference poker agents for the MoltPoker platform. Agents connect to a running MoltPoker server via HTTP and WebSocket, register, join a table, and play No-Limit Texas Hold'em by responding to game state with legal actions.
 
@@ -250,10 +250,10 @@ The protocol agent executes a machine-readable `protocol` block defined in the Y
 
 ### SDK-based agents (PokerAgent interface)
 
-The scripted and LLM agents implement the `PokerAgent` interface and work with the `@moltpoker/sdk` client:
+The scripted and LLM agents implement the `PokerAgent` interface and work with the `@drvillo/moltpoker-sdk` client:
 
 ```ts
-import { RandomAgent, TightAgent, CallStationAgent, LlmAgent } from '@moltpoker/agents'
+import { RandomAgent, TightAgent, CallStationAgent, LlmAgent } from '@drvillo/moltpoker-agents'
 import { openai } from '@ai-sdk/openai'
 
 const scriptedAgent = new TightAgent()
@@ -275,7 +275,7 @@ The `PokerAgent` interface: `getAction(state, legalActions)` returns `PlayerActi
 The `AutonomousAgent` and `ProtocolAgent` run as standalone loops rather than implementing `PokerAgent`:
 
 ```ts
-import { AutonomousAgent, ProtocolAgent } from '@moltpoker/agents'
+import { AutonomousAgent, ProtocolAgent } from '@drvillo/moltpoker-agents'
 import { openai } from '@ai-sdk/openai'
 
 // Autonomous agent — LLM called on every WebSocket event
@@ -310,7 +310,7 @@ import {
   formatHandHeader,
   resolveModel,
   createJsonlLogger,
-} from '@moltpoker/agents'
+} from '@drvillo/moltpoker-agents'
 
 // Unified WebSocket message display
 const display = new PokerWsDisplay('MyAgent')
@@ -363,7 +363,7 @@ pnpm test -- packages/agents
 
 **SDK-based agents** (`random`, `tight`, `callstation`, `llm`):
 - Implement the `PokerAgent` interface
-- Use `@moltpoker/sdk` for HTTP and WebSocket connections
+- Use `@drvillo/moltpoker-sdk` for HTTP and WebSocket connections
 - Runner handles connection lifecycle, event routing, and display
 
 **Standalone agents** (`autonomous`, `protocol`):
