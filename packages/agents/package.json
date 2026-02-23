@@ -1,6 +1,9 @@
 {
   "name": "@drvillo/moltpoker-agents",
   "version": "0.1.0",
+  "publishConfig": {
+    "access": "public"
+  },
   "description": "Reference poker agents for MoltPoker",
   "type": "module",
   "main": "./dist/index.js",
