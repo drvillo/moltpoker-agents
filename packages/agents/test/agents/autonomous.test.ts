@@ -5,7 +5,7 @@ import { join } from 'path'
 describe('Autonomous Agent - Skill Document Handling', () => {
   describe('Skill document structure', () => {
     it('should have valid YAML frontmatter', () => {
-      const skillPath = join(process.cwd(), 'public', 'skill.md')
+      const skillPath = join(process.cwd(), 'apps', 'public', 'skill.md')
       expect(existsSync(skillPath)).toBe(true)
       
       const content = readFileSync(skillPath, 'utf-8')
@@ -15,7 +15,7 @@ describe('Autonomous Agent - Skill Document Handling', () => {
     })
 
     it('should have exactly one Context Policy section', () => {
-      const skillPath = join(process.cwd(), 'public', 'skill.md')
+      const skillPath = join(process.cwd(), 'apps', 'public', 'skill.md')
       const content = readFileSync(skillPath, 'utf-8')
       
       const contextPolicyMatches = content.match(/^## Context Policy$/gm)
@@ -24,7 +24,7 @@ describe('Autonomous Agent - Skill Document Handling', () => {
     })
 
     it('should be a single self-contained skill document', () => {
-      const skillPath = join(process.cwd(), 'public', 'skill.md')
+      const skillPath = join(process.cwd(), 'apps', 'public', 'skill.md')
       const content = readFileSync(skillPath, 'utf-8')
       
       expect(content).not.toContain('references/API.md')
@@ -36,7 +36,7 @@ describe('Autonomous Agent - Skill Document Handling', () => {
     })
 
     it('should have runner contract metadata in frontmatter', () => {
-      const skillPath = join(process.cwd(), 'public', 'skill.md')
+      const skillPath = join(process.cwd(), 'apps', 'public', 'skill.md')
       const content = readFileSync(skillPath, 'utf-8')
       
       expect(content).toMatch(/runner_contract:/)
@@ -44,7 +44,7 @@ describe('Autonomous Agent - Skill Document Handling', () => {
     })
 
     it('should stay under recommended line count', () => {
-      const skillPath = join(process.cwd(), 'public', 'skill.md')
+      const skillPath = join(process.cwd(), 'apps', 'public', 'skill.md')
       const content = readFileSync(skillPath, 'utf-8')
       const lineCount = content.split('\n').length
       
@@ -55,7 +55,7 @@ describe('Autonomous Agent - Skill Document Handling', () => {
 
   describe('Context policy consolidation', () => {
     it('should not have duplicate "read once" instructions outside Context Policy', () => {
-      const skillPath = join(process.cwd(), 'public', 'skill.md')
+      const skillPath = join(process.cwd(), 'apps', 'public', 'skill.md')
       const content = readFileSync(skillPath, 'utf-8')
       
       // Find the Context Policy section
@@ -73,7 +73,7 @@ describe('Autonomous Agent - Skill Document Handling', () => {
     })
 
     it('should consolidate documentRole instruction in Context Policy', () => {
-      const skillPath = join(process.cwd(), 'public', 'skill.md')
+      const skillPath = join(process.cwd(), 'apps', 'public', 'skill.md')
       const content = readFileSync(skillPath, 'utf-8')
       
       const policyStart = content.indexOf('## Context Policy')
