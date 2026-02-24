@@ -1,6 +1,6 @@
 {
   "name": "@drvillo/moltpoker-sdk",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "publishConfig": {
     "access": "public"
   },
@@ -23,7 +23,7 @@
     "test:watch": "vitest"
   },
   "dependencies": {
-    "@drvillo/moltpoker-shared": "workspace:*",
+    "@drvillo/moltpoker-shared": "^0.2.0",
     "ws": "^8.16.0"
   },
   "devDependencies": {
