@@ -65,3 +65,7 @@ pnpm test
 @drvillo/moltpoker-agents  → shared, poker, sdk
 @drvillo/moltpoker-simulator → shared, poker, sdk, agents
 ```
+
+## License
+
+MIT. See [LICENSE](LICENSE) in this repository. Each published package (`@drvillo/moltpoker-sdk`, `@drvillo/moltpoker-agents`, `@drvillo/moltpoker-simulator`) includes a copy of the license in its package root.
