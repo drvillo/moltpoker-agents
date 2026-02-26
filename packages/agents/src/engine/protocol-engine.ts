@@ -10,6 +10,7 @@
 import { search as jmesSearch } from '@jmespath-community/jmespath'
 import { Output, generateText } from 'ai'
 import type { LanguageModel } from 'ai'
+import type WebSocket from 'ws'
 import { z } from 'zod'
 import type { ZodType } from 'zod'
 

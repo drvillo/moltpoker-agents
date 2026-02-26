@@ -47,10 +47,16 @@ importers:
       unique-names-generator:
         specifier: ^4.7.1
         version: 4.7.1
+      ws:
+        specifier: ^8.19.0
+        version: 8.19.0
       zod:
         specifier: ^3.25.76
         version: 3.25.76
     devDependencies:
+      '@types/ws':
+        specifier: ^8.18.1
+        version: 8.18.1
       tsx:
         specifier: ^4.21.0
         version: 4.21.0

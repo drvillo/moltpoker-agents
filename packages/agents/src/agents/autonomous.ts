@@ -1,5 +1,6 @@
 import { generateText, tool, stepCountIs } from 'ai'
 import type { LanguageModel, ModelMessage } from 'ai'
+import WebSocket from 'ws'
 import { z } from 'zod'
 
 import { createJsonlLogger } from '../lib/logger.js'

@@ -10,6 +10,7 @@
 
 import matter from 'gray-matter'
 import type { LanguageModel } from 'ai'
+import WebSocket from 'ws'
 
 import { createJsonlLogger } from '../lib/logger.js'
 import { LlmAgentBase } from './base.js'

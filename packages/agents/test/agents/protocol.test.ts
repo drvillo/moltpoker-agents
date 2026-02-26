@@ -5,42 +5,47 @@ import { ProtocolAgent, buildDefaultFallbackDecision } from '../../src/agents/pr
 
 const skillUrl = 'https://example.test/skill.md'
 
-class MockWebSocket {
-  static OPEN = 1
-  static CLOSED = 3
-  static instances: MockWebSocket[] = []
+const { MockWebSocket } = vi.hoisted(() => {
+  class MockWebSocket {
+    static OPEN = 1
+    static CLOSED = 3
+    static instances: MockWebSocket[] = []
 
-  readonly url: string
-  readyState = MockWebSocket.OPEN
-  sent: string[] = []
-  private listeners = new Map<string, Array<(event: unknown) => void>>()
+    readonly url: string
+    readyState = MockWebSocket.OPEN
+    sent: string[] = []
+    private listeners = new Map<string, Array<(event: unknown) => void>>()
 
-  constructor(url: string) {
-    this.url = url
-    MockWebSocket.instances.push(this)
-    queueMicrotask(() => this.emit('open', {}))
-  }
+    constructor(url: string) {
+      this.url = url
+      MockWebSocket.instances.push(this)
+      queueMicrotask(() => this.emit('open', {}))
+    }
 
-  addEventListener(type: string, listener: (event: unknown) => void) {
-    const current = this.listeners.get(type) ?? []
-    this.listeners.set(type, [...current, listener])
-  }
+    addEventListener(type: string, listener: (event: unknown) => void) {
+      const current = this.listeners.get(type) ?? []
+      this.listeners.set(type, [...current, listener])
+    }
 
-  send(data: string) {
-    this.sent.push(data)
-  }
+    send(data: string) {
+      this.sent.push(data)
+    }
 
-  close() {
-    this.readyState = MockWebSocket.CLOSED
-    this.emit('close', {})
-  }
+    close() {
+      this.readyState = MockWebSocket.CLOSED
+      this.emit('close', {})
+    }
 
-  emit(type: string, event: unknown) {
-    for (const listener of this.listeners.get(type) ?? []) {
-      listener(event)
+    emit(type: string, event: unknown) {
+      for (const listener of this.listeners.get(type) ?? []) {
+        listener(event)
+      }
     }
   }
-}
+  return { MockWebSocket }
+})
+
+vi.mock('ws', () => ({ default: MockWebSocket }))
 
 function makeModel(config: { shouldThrow?: boolean; decision?: { reasoning: string; kind: string; amount: number | null } }) {
   if (config.shouldThrow) {
@@ -130,17 +135,14 @@ function getSocket() {
 
 describe('ProtocolAgent actionable flow', () => {
   const originalFetch = globalThis.fetch
-  const originalWebSocket = globalThis.WebSocket
 
   beforeEach(() => {
     MockWebSocket.instances = []
-    vi.stubGlobal('WebSocket', MockWebSocket)
   })
 
   afterEach(() => {
     vi.restoreAllMocks()
     globalThis.fetch = originalFetch
-    if (originalWebSocket) globalThis.WebSocket = originalWebSocket
   })
 
   it('sends exactly one action on actionable message when llmDecide succeeds', async () => {
