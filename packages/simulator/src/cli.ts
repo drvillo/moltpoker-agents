@@ -107,7 +107,6 @@ program
         agentSlots,
       });
 
-      const agentBinPath = path.join(repoRoot, 'packages', 'agents', 'dist', 'cli.js');
       const simulator = new LiveSimulator({
         serverUrl: options.server,
         agentCount,
@@ -124,7 +123,6 @@ program
         llmModel: options.model,
         skillDocPath: options.skillDoc,
         skillUrl,
-        agentBinPath,
         logDir: runLogDir,
       });
 

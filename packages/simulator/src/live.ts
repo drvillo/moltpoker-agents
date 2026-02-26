@@ -1,10 +1,10 @@
-import { existsSync } from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import type { ChildProcess } from 'child_process';
 import WebSocket from 'ws';
 import { createSimulationAgentPlan, type AgentPlan } from '@drvillo/moltpoker-agents';
 import { ChildProcessSpawnStrategy, type SpawnStrategy } from './spawn-strategy.js';
+import { resolveAgentBinPath } from './resolve-agent-bin.js';
 
 /** Parsed agent slot: type plus optional inline model override (e.g. llm:anthropic:claude-sonnet-4-5) */
 export interface AgentSlot {
@@ -29,16 +29,6 @@ export function parseAgentSlots(spec: string): AgentSlot[] {
 }
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-
-function findRepoRoot(startDir: string): string {
-  let dir = path.resolve(startDir);
-  const root = path.parse(dir).root;
-  while (dir !== root) {
-    if (existsSync(path.join(dir, 'pnpm-workspace.yaml'))) return dir;
-    dir = path.dirname(dir);
-  }
-  return process.cwd();
-}
 
 function sanitizeNodeOptionsForChild(raw: string | undefined): string | undefined {
   if (!raw) return raw;
@@ -406,9 +396,14 @@ export class LiveSimulator {
   }
 
   private async spawnAgent(tableId: string | null, plan: AgentPlan): Promise<void> {
-    const agentBin =
-      this.options.agentBinPath ??
-      path.join(findRepoRoot(__dirname), 'packages', 'agents', 'dist', 'cli.js');
+    const { resolvedPath: agentBin, source } = resolveAgentBinPath({
+      explicitPath: this.options.agentBinPath,
+      startDir: __dirname,
+    });
+
+    if (this.options.verbose) {
+      console.log(`Agent binary resolved via ${source}: ${agentBin}`);
+    }
 
     const proc = this.spawnStrategy.spawn(plan, {
       agentBin,

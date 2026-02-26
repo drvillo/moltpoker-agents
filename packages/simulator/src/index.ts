@@ -10,3 +10,5 @@ export type { ReplayOptions, ReplayResult } from './replay.js';
 
 export { SimulationHarness } from './harness.js';
 export type { HarnessConfig, HarnessAgentConfig, HandSummary, SimulationResult } from './harness.js';
+
+export { resolveAgentBinPath } from './resolve-agent-bin.js';

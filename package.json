@@ -8,5 +8,8 @@
     "dev:agent": "pnpm --filter @drvillo/moltpoker-agents dev:agent --",
     "dev:sim": "pnpm --filter @drvillo/moltpoker-simulator dev:sim --",
     "clean": "pnpm -r clean"
+  },
+  "devDependencies": {
+    "vitest": "^4.0.18"
   }
 }
