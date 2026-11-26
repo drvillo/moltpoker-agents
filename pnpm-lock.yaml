@@ -4,6 +4,10 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  '@drvillo/moltpoker-shared': file:/tmp/engine-tarballs/drvillo-moltpoker-shared-0.2.7.tgz
+  '@drvillo/moltpoker-poker': file:/tmp/engine-tarballs/drvillo-moltpoker-poker-0.2.7.tgz
+
 importers:
 
   .:
@@ -21,14 +25,14 @@ importers:
         specifier: ^3.0.25
         version: 3.0.31(zod@3.25.76)
       '@drvillo/moltpoker-poker':
-        specifier: ^0.2.0
-        version: 0.2.1
+        specifier: file:/tmp/engine-tarballs/drvillo-moltpoker-poker-0.2.7.tgz
+        version: file:../../../tmp/engine-tarballs/drvillo-moltpoker-poker-0.2.7.tgz
       '@drvillo/moltpoker-sdk':
         specifier: workspace:*
         version: link:../sdk
       '@drvillo/moltpoker-shared':
-        specifier: ^0.2.0
-        version: 0.2.1
+        specifier: file:/tmp/engine-tarballs/drvillo-moltpoker-shared-0.2.7.tgz
+        version: file:../../../tmp/engine-tarballs/drvillo-moltpoker-shared-0.2.7.tgz
       '@jmespath-community/jmespath':
         specifier: ^1.3.0
         version: 1.3.0
@@ -67,8 +71,8 @@ importers:
   packages/sdk:
     dependencies:
       '@drvillo/moltpoker-shared':
-        specifier: ^0.2.0
-        version: 0.2.1
+        specifier: file:/tmp/engine-tarballs/drvillo-moltpoker-shared-0.2.7.tgz
+        version: file:../../../tmp/engine-tarballs/drvillo-moltpoker-shared-0.2.7.tgz
       ws:
         specifier: ^8.16.0
         version: 8.19.0
@@ -86,14 +90,14 @@ importers:
         specifier: workspace:*
         version: link:../agents
       '@drvillo/moltpoker-poker':
-        specifier: ^0.2.0
-        version: 0.2.1
+        specifier: file:/tmp/engine-tarballs/drvillo-moltpoker-poker-0.2.7.tgz
+        version: file:../../../tmp/engine-tarballs/drvillo-moltpoker-poker-0.2.7.tgz
       '@drvillo/moltpoker-sdk':
         specifier: workspace:*
         version: link:../sdk
       '@drvillo/moltpoker-shared':
-        specifier: ^0.2.0
-        version: 0.2.1
+        specifier: file:/tmp/engine-tarballs/drvillo-moltpoker-shared-0.2.7.tgz
+        version: file:../../../tmp/engine-tarballs/drvillo-moltpoker-shared-0.2.7.tgz
       commander:
         specifier: ^11.1.0
         version: 11.1.0
@@ -144,11 +148,13 @@ packages:
     resolution: {integrity: sha512-oGMAgGoQdBXbZqNG0Ze56CHjDZ1IDYOwGYxYjO5KLSlz5HiNQ9udIXsPZ61VWaHGZ5XW/jyjmr6t2xz2jGVwbQ==}
     engines: {node: '>=18'}
 
-  '@drvillo/moltpoker-poker@0.2.1':
-    resolution: {integrity: sha512-P3as0R/VF4vS+w4cFi0dugWRzRwj56Yu6KzPfZFZH+s20aN/OLlqrAernVzg7j2Ao0ROY/HDvQ6E+Yk52MjAKg==}
+  '@drvillo/moltpoker-poker@file:../../../tmp/engine-tarballs/drvillo-moltpoker-poker-0.2.7.tgz':
+    resolution: {integrity: sha512-t2a2evRMNyQGqee8EYjTiU0sM3Rtg2+5DPo33XwTeigGyRkTyjhB9Pir3chxmxAotGC6rxVCewzY5oU6TtGDlg==, tarball: file:../../../tmp/engine-tarballs/drvillo-moltpoker-poker-0.2.7.tgz}
+    version: 0.2.7
 
-  '@drvillo/moltpoker-shared@0.2.1':
-    resolution: {integrity: sha512-0YlESEA/R2yM7lDN9344Eegqi1ekPulfVlj7ThDL+uEV3RIKG89TCsGQdz4CZ1PZRnWKsvQXLRBXUc2YPXt+OQ==}
+  '@drvillo/moltpoker-shared@file:../../../tmp/engine-tarballs/drvillo-moltpoker-shared-0.2.7.tgz':
+    resolution: {integrity: sha512-AlOpUq8mD3+VUB+p/BqTqjedIW6xj+DfythLn9jpXNL4I1BofwEuYFpmZiQ/wDdiruqbl9D6AR7YqCjbmBw40g==, tarball: file:../../../tmp/engine-tarballs/drvillo-moltpoker-shared-0.2.7.tgz}
+    version: 0.2.7
 
   '@esbuild/aix-ppc64@0.27.3':
     resolution: {integrity: sha512-9fJMTNFTWZMh5qwrBItuziu834eOCUcEqymSH7pY+zoMVEZg3gcPuBNxH1EvfVYe9h0x/Ptw8KBzv7qxb7l8dg==}
@@ -814,12 +820,12 @@ snapshots:
     dependencies:
       json-schema: 0.4.0
 
-  '@drvillo/moltpoker-poker@0.2.1':
+  '@drvillo/moltpoker-poker@file:../../../tmp/engine-tarballs/drvillo-moltpoker-poker-0.2.7.tgz':
     dependencies:
-      '@drvillo/moltpoker-shared': 0.2.1
+      '@drvillo/moltpoker-shared': file:../../../tmp/engine-tarballs/drvillo-moltpoker-shared-0.2.7.tgz
       seedrandom: 3.0.5
 
-  '@drvillo/moltpoker-shared@0.2.1':
+  '@drvillo/moltpoker-shared@file:../../../tmp/engine-tarballs/drvillo-moltpoker-shared-0.2.7.tgz':
     dependencies:
       zod: 3.25.76
 
