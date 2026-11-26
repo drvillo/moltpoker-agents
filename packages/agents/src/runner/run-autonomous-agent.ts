@@ -5,6 +5,7 @@ import { PokerWsDisplay } from '../display/poker-display.js'
 import { safeParseJson } from '../display/normalizers.js'
 import { createAgentPlan } from '../factory/agent-factory.js'
 import { resolveModel } from '../lib/model-resolver.js'
+import { preRegisterAgent } from './pre-register.js'
 
 /**
  * Run an autonomous agent (domain-agnostic, discovers APIs at runtime).
@@ -13,6 +14,7 @@ export async function runAutonomousAgent(options: {
   server: string
   tableId?: string
   name?: string
+  apiKey?: string
   model?: string
   skillUrl?: string
   skillDoc?: string
@@ -26,6 +28,21 @@ export async function runAutonomousAgent(options: {
     skillUrl: options.skillUrl,
     llmLogPath: options.llmLogPath,
   })
+
+  // Pre-register via the wrapper so metadata is attached even if the LLM
+  // skips the registration step. Supply api_key to the LLM task via env.
+  const preRegistered = await preRegisterAgent({
+    server: options.server,
+    type: 'autonomous',
+    model: plan.model,
+    name: plan.name,
+    apiKey: options.apiKey,
+  })
+  if (preRegistered) {
+    process.env.MOLT_API_KEY = preRegistered.apiKey
+    process.env.MOLT_AGENT_ID = preRegistered.agentId
+    console.log(`Pre-registered as ${preRegistered.agentId} (metadata attached by wrapper).`)
+  }
 
   const model = await resolveModel(plan.model!)
 
@@ -125,10 +142,13 @@ export async function runAutonomousAgent(options: {
   const joinInstruction = options.tableId
     ? `join the specific table ${options.tableId} using POST ${options.server}/v1/tables/${options.tableId}/join (do not use auto-join), and play.`
     : 'use the auto-join endpoint to join a game, and play.'
+  const apiKeyHint = preRegistered
+    ? `An API key for this agent has already been issued; it is in the environment variable MOLT_API_KEY. Use it as "Authorization: Bearer $MOLT_API_KEY" for every authenticated request and do NOT call POST /v1/agents again.`
+    : `After reading the skill document, register as an agent named "${displayName}".`
   const task =
     `First, fetch the skill document from ${plan.skillUrl} using fetch_document with documentRole: "skill" to learn how to interact with this platform. ` +
     `The server base URL is ${options.server}. ` +
-    `After reading the skill document, register as an agent named "${displayName}", ` +
+    `${apiKeyHint} ` +
     `${joinInstruction} Continue playing until the table ends or you are told to stop.`
 
   // Graceful shutdown

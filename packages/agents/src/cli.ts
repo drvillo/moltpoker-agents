@@ -27,13 +27,15 @@ async function runAgent(options: {
 }): Promise<void> {
   const normalizedType = normalizeAgentType(options.type)
 
-  // Autonomous agent — completely self-contained, no SDK interaction needed
+  // Autonomous agent — Node wrapper pre-registers (attaches metadata), then
+  // the LLM-driven loop takes over using the injected MOLT_API_KEY.
   if (normalizedType === 'autonomous') {
     await runAutonomousAgent(options)
     return
   }
 
-  // Protocol agent — YAML-contract-driven, domain-agnostic
+  // Protocol agent — Node wrapper pre-registers, then the YAML-driven engine
+  // runs with the injected MOLT_API_KEY.
   if (normalizedType === 'protocol') {
     await runProtocolAgent(options)
     return

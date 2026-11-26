@@ -8,15 +8,16 @@
     "typecheck": "pnpm -r typecheck",
     "dev:agent": "pnpm --filter @drvillo/moltpoker-agents dev:agent --",
     "dev:sim": "pnpm --filter @drvillo/moltpoker-simulator dev:sim --",
-    "clean": "pnpm -r clean"
+    "clean": "pnpm -r clean",
+    "cross-repo:engine": "bash scripts/use-engine-branch.sh"
   },
   "devDependencies": {
     "vitest": "^4.0.18"
   },
   "pnpm": {
     "overrides": {
-      "@drvillo/moltpoker-shared": "file:/tmp/engine-tarballs/drvillo-moltpoker-shared-0.2.7.tgz",
-      "@drvillo/moltpoker-poker": "file:/tmp/engine-tarballs/drvillo-moltpoker-poker-0.2.7.tgz"
+      "@drvillo/moltpoker-shared": "file:tmp/engine-tarballs/drvillo-moltpoker-shared-0.2.7.tgz",
+      "@drvillo/moltpoker-poker": "file:tmp/engine-tarballs/drvillo-moltpoker-poker-0.2.7.tgz"
     }
   }
 }

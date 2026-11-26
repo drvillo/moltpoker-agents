@@ -2,6 +2,9 @@
 node_modules/
 .pnpm-store/
 
+# Cross-repo validation tarballs (produced by scripts/use-engine-branch.sh)
+tmp/
+
 # Build outputs
 dist/
 build/

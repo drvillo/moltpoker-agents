@@ -1,0 +1,75 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      engine_branch:
+        description: "drvillo/moltpoker-engine branch to validate against (default: main)"
+        required: false
+        default: "main"
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Cross-repo build / Lint / Typecheck / Test
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    env:
+      # When the engine side of the plan is still on a feature branch, point
+      # this at that branch so the agents suite is validated end-to-end against
+      # the upcoming engine release. Once engine has published, leave at main.
+      ENGINE_BRANCH: ${{ inputs.engine_branch || 'cursor/onboarding-fixes-engine-7593' }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+          run_install: false
+
+      - name: Get pnpm store directory
+        id: pnpm-store
+        shell: bash
+        run: echo "path=$(pnpm store path --silent)" >> "$GITHUB_OUTPUT"
+
+      - name: Cache pnpm store
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.pnpm-store.outputs.path }}
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-
+
+      # Rebuild engine tarballs under ./tmp/engine-tarballs so the committed
+      # pnpm.overrides in package.json resolve successfully. Prints a clear
+      # error if the chosen engine branch does not exist; it's fine to fall
+      # back to main once engine has shipped the matching release.
+      - name: Cross-repo build (engine -> tarballs)
+        shell: bash
+        run: |
+          set -euo pipefail
+          ENGINE_BRANCH="${ENGINE_BRANCH}" pnpm cross-repo:engine
+
+      - name: Typecheck
+        run: pnpm -r typecheck
+
+      - name: Build
+        run: pnpm -r build
+
+      - name: Test
+        run: pnpm -r test

@@ -4,6 +4,7 @@ import { ProtocolAgent } from '../agents/protocol.js'
 import { PokerWsDisplay } from '../display/poker-display.js'
 import { createAgentPlan } from '../factory/agent-factory.js'
 import { resolveModel } from '../lib/model-resolver.js'
+import { preRegisterAgent } from './pre-register.js'
 
 /**
  * Run a protocol agent (YAML-contract-driven, domain-agnostic).
@@ -12,6 +13,7 @@ export async function runProtocolAgent(options: {
   server: string
   tableId?: string
   name?: string
+  apiKey?: string
   model?: string
   skillUrl?: string
   llmLog?: boolean
@@ -24,6 +26,22 @@ export async function runProtocolAgent(options: {
     skillUrl: options.skillUrl,
     llmLogPath: options.llmLogPath,
   })
+
+  // Register via the Node wrapper so molt_simulation / molt_model metadata is
+  // attached reliably, then expose the api_key via env so the YAML-driven
+  // register step can reuse it instead of creating a second agent.
+  const preRegistered = await preRegisterAgent({
+    server: options.server,
+    type: 'protocol',
+    model: plan.model,
+    name: plan.name,
+    apiKey: options.apiKey,
+  })
+  if (preRegistered) {
+    process.env.MOLT_API_KEY = preRegistered.apiKey
+    process.env.MOLT_AGENT_ID = preRegistered.agentId
+    console.log(`Pre-registered as ${preRegistered.agentId} (metadata attached by wrapper).`)
+  }
 
   const model = await resolveModel(plan.model!)
 

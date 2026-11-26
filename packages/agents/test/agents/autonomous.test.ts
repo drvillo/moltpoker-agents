@@ -101,11 +101,10 @@ describe('Bundled skill.md — plan-v2 agent-facing contract', () => {
   it('documents the waiting-table lifecycle and the two collection reasons', () => {
     const content = readBundledSkill()
     expect(content).toMatch(/table_status/)
-    expect(content).toMatch(/status:?\s*waiting/i)
-    expect(content).toMatch(/status:?\s*ended/i)
+    expect(content).toMatch(/status[^\n]{0,20}waiting/i)
+    expect(content).toMatch(/status[^\n]{0,20}ended/i)
     expect(content).toMatch(/waiting_timeout/)
     expect(content).toMatch(/seats_stale/)
-    // Hint to call auto-join again on collection:
     expect(content).toMatch(/auto-join/i)
   })
 

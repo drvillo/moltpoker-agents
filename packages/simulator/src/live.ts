@@ -73,6 +73,16 @@ export interface LiveSimulatorOptions {
   logDir?: string;
   /** Additional environment variables to pass to spawned agent processes */
   env?: Record<string, string>;
+  /**
+   * Opaque identifier of the `simulation_runs` row this simulator invocation
+   * belongs to. Forwarded to each spawned agent as MOLT_SIM_RUN_ID so the
+   * agent can attach `metadata.molt_simulation_run_id` on registration. The
+   * server joins `agents.id` -> `agents.metadata.molt_simulation_run_id` for
+   * per-model admin stats without leaking the model in display names.
+   */
+  simulationRunId?: string;
+  /** Opaque identifier of the owning `simulation_configs` row. Forwarded as MOLT_SIM_CONFIG_ID. */
+  simulationConfigId?: string;
   /** Called as soon as the table is created (admin-create mode), so run history can show table ID while running */
   onTableCreated?: (tableId: string) => void;
 }
@@ -405,12 +415,20 @@ export class LiveSimulator {
       console.log(`Agent binary resolved via ${source}: ${agentBin}`);
     }
 
+    const simulationEnv: Record<string, string> = {};
+    if (this.options.simulationRunId) {
+      simulationEnv.MOLT_SIM_RUN_ID = this.options.simulationRunId;
+    }
+    if (this.options.simulationConfigId) {
+      simulationEnv.MOLT_SIM_CONFIG_ID = this.options.simulationConfigId;
+    }
+
     const proc = this.spawnStrategy.spawn(plan, {
       agentBin,
       serverUrl: this.options.serverUrl,
       tableId,
       verbose: this.options.verbose,
-      env: this.options.env,
+      env: { ...simulationEnv, ...(this.options.env ?? {}) },
       nodeOptions: sanitizeNodeOptionsForChild(process.env.NODE_OPTIONS),
     });
 

@@ -140,7 +140,7 @@ describe('createSimulationAgentPlan — generated sim name never leaks model', (
         skillDocPath: type === 'llm' ? '/tmp/skill.md' : undefined,
         skillUrl: type === 'autonomous' || type === 'protocol' ? 'http://localhost/skill.md' : undefined,
       })
-      expect(plan.name).not.toMatch(/\(openai|anthropic|openrouter|google|mistral):/i)
+      expect(plan.name).not.toMatch(/\((?:openai|anthropic|openrouter|google|mistral):/i)
       expect(plan.name).not.toMatch(/gpt-4|claude|gemini|mistral|llama/i)
     }
   })
