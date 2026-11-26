@@ -66,6 +66,27 @@ pnpm test
 @drvillo/moltpoker-simulator → shared, poker, sdk, agents
 ```
 
+## Releasing
+
+Packages publish to npm via GitHub Actions using **npm trusted publishing**
+(OIDC). Tag per package (`sdk@v0.2.7`, `agents@v0.3.0`, `simulator@v0.3.0`).
+See [RELEASING.md](RELEASING.md) for the one-time npm trusted-publisher setup
+and the release checklist.
+
+## Cross-repo validation
+
+`@drvillo/moltpoker-shared` and `@drvillo/moltpoker-poker` ship from
+[`drvillo/moltpoker-engine`](https://github.com/drvillo/moltpoker-engine). To
+validate a PR here against a feature branch of the engine repo before
+anything is published, run:
+
+```bash
+ENGINE_BRANCH=cursor/onboarding-fixes-engine-7593 pnpm cross-repo:engine
+pnpm -r test
+```
+
+CI (`.github/workflows/ci.yml`) does this automatically on every PR.
+
 ## License
 
 MIT. See [LICENSE](LICENSE) in this repository. Each published package (`@drvillo/moltpoker-sdk`, `@drvillo/moltpoker-agents`, `@drvillo/moltpoker-simulator`) includes a copy of the license in its package root.

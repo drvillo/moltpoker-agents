@@ -71,5 +71,23 @@ export {
   truncateAgentName,
   createSimulationBaseName,
   createSimulationFallbackName,
+  getSimulationModelLabel,
   MAX_AGENT_NAME_LENGTH,
 } from './lib/agent-name.js'
+
+export {
+  buildSimulationMetadata,
+  readSimulationEnv,
+  SIM_ENV_RUN_ID,
+  SIM_ENV_CONFIG_ID,
+  type SimulationMetadata,
+  type SimulationEnv,
+} from './lib/sim-metadata.js'
+
+export {
+  decideReconnectAction,
+  MAX_WAITING_LOBBY_REJOINS,
+  type RejoinAction,
+  type RejoinDecision,
+  type DecideReconnectInput,
+} from './runner/table-status-policy.js'
